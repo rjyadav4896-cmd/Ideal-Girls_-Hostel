@@ -40,7 +40,12 @@ const propertyPhotos = [
   { title: "Parking", image: parkingImage, showTitle: true },
 ];
 
+const festivalPhotos = [
+  { title: "Festival Photo", image: festivalImage, showTitle: true },
+];
+
 const allPhotos = [
+  ...festivalPhotos,
   ...studentLifePhotos,
   ...propertyPhotos,
 ];
@@ -53,10 +58,7 @@ const galleries = {
     cover: festivalImage,
     accent: "from-orange-500/70 via-amber-400/35 to-orange-950/90",
     icon: PartyPopper,
-    photos: [
-      studentLifePhotos[0],
-      { title: "Festival Photo", image: festivalImage },
-    ].filter(Boolean),
+    photos: festivalPhotos,
   },
   student: {
     title: "Student Images",

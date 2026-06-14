@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import kritiImage from "../../assets/hstl_003/kriti-yadav.jpeg";
 import kabitaImage from "../../assets/hstl_003/kabita-gc.jpeg";
+import loksewaImage from "../../assets/hstl_003/loksewa-selection-person.png";
 import taraImage from "../../assets/hstl_003/tara-magar.jpeg";
 
 const testimonials = [
@@ -53,6 +54,15 @@ const testimonials = [
     exam: "Nursing",
     quote:
       "Ideal Girls Hostel gave me a comfortable place to stay focused on nursing preparation.",
+  },
+];
+
+const successCategories = [
+  {
+    label: "Loksewa",
+    count: "300 Selections",
+    image: loksewaImage,
+    imagePosition: "50% 38%",
   },
 ];
 
@@ -111,8 +121,33 @@ export default function StudentSuccessSection() {
         <h2 className="mb-6 text-center text-sm font-bold uppercase tracking-wide text-orange-700">
           Topper Stories
         </h2>
+
+        <div className="mx-auto flex max-w-[280px] justify-center text-center">
+          {successCategories.map((category) => (
+            <div
+              key={category.label}
+              className="flex min-w-0 flex-col items-center"
+            >
+              <div className="h-24 w-24 overflow-hidden rounded-full border-4 border-white bg-slate-100 shadow-md ring-2 ring-orange-100 sm:h-28 sm:w-28">
+                <img
+                  src={category.image}
+                  alt={`${category.label} success`}
+                  style={{ objectPosition: category.imagePosition }}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <div className="mt-3 text-sm font-black uppercase leading-5 text-slate-950 sm:text-base">
+                {category.label}
+              </div>
+              <div className="text-xs font-bold leading-5 text-slate-600 sm:text-sm">
+                ({category.count})
+              </div>
+            </div>
+          ))}
+        </div>
+
         <div
-          className="relative mx-auto min-h-[188px] max-w-[888px] cursor-pointer rounded-2xl bg-white px-6 py-6 shadow-xl ring-1 ring-slate-200 sm:h-[188px]"
+          className="relative mx-auto mt-8 min-h-[188px] max-w-[888px] cursor-pointer rounded-2xl bg-white px-6 py-8 shadow-xl ring-1 ring-slate-200 sm:h-[188px] sm:py-6"
           onClick={showNextTestimonial}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}

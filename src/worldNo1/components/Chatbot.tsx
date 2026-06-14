@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MessageCircle, Send, X } from 'lucide-react';
+import { Send, X } from 'lucide-react';
 
 export default function Chatbot({ phoneDisplay }: { phoneDisplay: string }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,23 +41,49 @@ export default function Chatbot({ phoneDisplay }: { phoneDisplay: string }) {
     <>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 w-14 h-14 bg-gradient-to-br from-orange-700 to-amber-500 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow z-50"
-        aria-label="Chat Support"
+        className={`ask-ideal-launcher fixed bottom-5 right-5 z-50 focus:outline-none focus-visible:ring-4 focus-visible:ring-amber-200 ${
+          isOpen ? 'is-open' : ''
+        }`}
+        aria-label={isOpen ? 'Close Ask Ideal chat' : 'Open Ask Ideal chat'}
       >
-        {isOpen ? <X className="w-6 h-6 text-white" /> : <MessageCircle className="w-6 h-6 text-white" />}
+        <span className="ask-ideal-bubble" aria-hidden="true">
+          {isOpen ? (
+            <X className="ask-ideal-close" />
+          ) : (
+            <svg viewBox="0 0 64 64" role="img">
+              <defs>
+                <radialGradient id="ask-ideal-orange-gradient" cx="38%" cy="30%" r="75%">
+                  <stop offset="0%" stopColor="#f59e0b" />
+                  <stop offset="58%" stopColor="#ea580c" />
+                  <stop offset="100%" stopColor="#9a3412" />
+                </radialGradient>
+              </defs>
+              <circle className="ask-ideal-circle" cx="32" cy="32" r="32" />
+              <path
+                className="ask-ideal-chatmark"
+                d="M22.5 36.8 C18.9 33.5 18.6 27.9 21.8 24 C25.5 19.5 32.4 18.7 37.6 21.8 C43.2 25.1 45.3 31.7 42.5 36.9 C39.6 42.3 32.4 44.4 26.9 41.5 L21.5 43.6 L22.5 36.8"
+              />
+              <text className="ask-ideal-circle-text" x="32" y="33" textAnchor="middle">
+                ask
+              </text>
+            </svg>
+          )}
+        </span>
       </button>
 
       {isOpen && (
-        <div className="fixed bottom-24 right-6 w-80 sm:w-96 bg-white rounded-2xl shadow-2xl z-50 border border-slate-200 flex flex-col max-h-[500px]">
-          <div className="bg-orange-950 px-4 py-3 rounded-t-2xl">
-            <h3 className="font-semibold text-white">Ideal Girls Hostel Support</h3>
-            <p className="text-xs text-slate-300">Quick answers from the HSTL_003 details</p>
+        <div className="ask-ideal-window fixed bottom-24 right-5 z-50 flex max-h-[500px] w-[calc(100vw-2.5rem)] max-w-96 flex-col">
+          <div className="ask-ideal-header px-4 py-3">
+            <h3 className="font-display text-base font-bold text-orange-950">ask ideal</h3>
+            <p className="text-xs font-medium text-slate-600">Ideal Girls Hostel support</p>
           </div>
 
-          <div className="flex-1 p-4 space-y-3 overflow-y-auto">
+          <div className="min-h-0 flex-1 space-y-3 overflow-y-auto p-4">
             {messages.map((message, index) => (
               <div key={index} className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-[80%] rounded-xl px-3 py-2 ${message.type === 'user' ? 'bg-orange-700 text-white' : 'bg-slate-100 text-orange-900'}`}>
+                <div className={`ask-ideal-message max-w-[82%] px-3 py-2 ${
+                  message.type === 'user' ? 'ask-ideal-message-user text-white' : 'ask-ideal-message-bot text-orange-950'
+                }`}>
                   <p className="text-sm">{message.text}</p>
                 </div>
               </div>
@@ -65,9 +91,9 @@ export default function Chatbot({ phoneDisplay }: { phoneDisplay: string }) {
 
             {messages.length === 1 && (
               <div className="space-y-2">
-                <p className="text-xs text-slate-600 text-center mb-2">Quick questions:</p>
+                <p className="text-xs text-slate-600 text-center mb-2">Quick questions</p>
                 {faqs.map((faq) => (
-                  <button key={faq.question} onClick={() => handleQuickQuestion(faq.question)} className="w-full text-left px-3 py-2 bg-orange-50 hover:bg-slate-100 rounded-lg text-sm text-slate-700 transition-colors">
+                  <button key={faq.question} onClick={() => handleQuickQuestion(faq.question)} className="ask-ideal-quick w-full px-3 py-2 text-left text-sm font-semibold text-slate-800 transition-colors hover:bg-orange-50">
                     {faq.question}
                   </button>
                 ))}
@@ -75,17 +101,17 @@ export default function Chatbot({ phoneDisplay }: { phoneDisplay: string }) {
             )}
           </div>
 
-          <div className="p-4 border-t border-slate-200">
+          <div className="ask-ideal-composer p-4">
             <div className="flex gap-2">
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                 placeholder="Type your message..."
-                className="flex-1 px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-orange-600 focus:border-transparent text-sm"
+                className="ask-ideal-input min-w-0 flex-1 px-3 py-2 text-sm focus:outline-none"
               />
-              <button onClick={handleSend} className="w-10 h-10 rounded-md bg-orange-700 hover:bg-orange-800 flex items-center justify-center">
-                <Send className="w-4 h-4 text-white" />
+              <button onClick={handleSend} className="ask-ideal-send flex h-10 w-10 items-center justify-center transition-transform hover:-translate-y-0.5" aria-label="Send message">
+                <Send className="h-4 w-4 text-white" />
               </button>
             </div>
           </div>
