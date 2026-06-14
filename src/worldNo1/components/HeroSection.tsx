@@ -54,6 +54,7 @@ export default function HeroSection() {
               className="mt-5 max-w-2xl text-base leading-7 text-slate-100 sm:mt-6 sm:text-lg md:text-xl"
             >
               A luxurious hostel at low price in Bajrang Chowk, Janakpur, Nepal
+              <p> </p>
             </motion.p>
 
             <motion.div
