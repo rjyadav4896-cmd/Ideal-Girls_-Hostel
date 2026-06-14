@@ -6,16 +6,6 @@ import taraImage from "../../assets/hstl_003/tara-magar.jpeg";
 
 const testimonials = [
   {
-    photo: kritiImage,
-    photoPosition: "50% 38%",
-    name: "Bishnu GC",
-    college: "HA",
-    rank: "4-time HA success",
-    exam: "Health assistant",
-    quote:
-      "The hostel environment helped me keep a steady routine for repeated preparation.",
-  },
-  {
     photo: taraImage,
     photoPosition: "50% 42%",
     name: "Tara Magar",
@@ -34,16 +24,6 @@ const testimonials = [
     exam: "Auxiliary Nurse Midwife",
     quote:
       "The hostel routine supported focused preparation and comfortable living.",
-  },
-  {
-    photo: kritiImage,
-    photoPosition: "50% 38%",
-    name: "Prabeshika Khadka",
-    college: "ANM",
-    rank: "Student success",
-    exam: "Auxiliary Nurse Midwife",
-    quote:
-      "A steady daily routine helped me continue my studies with confidence.",
   },
   {
     photo: kritiImage,
